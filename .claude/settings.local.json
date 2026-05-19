@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(Get-ChildItem \"C:\\\\Users\\\\home\\\\Downloads\" | Where-Object { $_.Extension -match \"\\\\.\\(mp4|mov|avi|webm\\)\" } | Select-Object Name)"
+    ]
+  }
+}
