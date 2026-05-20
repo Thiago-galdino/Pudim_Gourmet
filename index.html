@@ -9,6 +9,9 @@
   <meta property="og:title" content="Pudim Gourmet Mikaelly" />
   <meta property="og:description" content="O pudim mais cremoso e irresistível da sua cidade." />
 
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="icon" type="image/jpeg" href="assets/logo.jpg" />
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,700&family=Lato:wght@300;400;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400;1,500&display=swap" rel="stylesheet" />
@@ -1174,6 +1177,159 @@
     }
     .footer-bottom a { color: var(--gold); }
 
+    /* ─── CARRINHO ─── */
+    .cart-fab {
+      position: fixed;
+      bottom: 104px;
+      right: 30px;
+      z-index: 999;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold-light), var(--gold));
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      box-shadow: 0 4px 20px rgba(200,148,58,0.5);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .cart-fab:hover { transform: scale(1.1); box-shadow: 0 8px 30px rgba(200,148,58,0.6); }
+    .cart-fab-badge {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      background: #e53935;
+      color: white;
+      border-radius: 50%;
+      width: 22px;
+      height: 22px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid var(--cream-light);
+    }
+    .cart-fab-badge.visible { display: flex; }
+
+    .cart-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(44,24,16,0.6);
+      z-index: 1100;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+    .cart-overlay.open { opacity: 1; pointer-events: all; }
+
+    .cart-drawer {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: min(420px, 100vw);
+      background: var(--cream-light);
+      z-index: 1101;
+      display: flex;
+      flex-direction: column;
+      transform: translateX(100%);
+      transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+      box-shadow: -4px 0 40px rgba(44,24,16,0.2);
+    }
+    .cart-drawer.open { transform: translateX(0); }
+
+    .cart-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 24px;
+      border-bottom: 1px solid rgba(200,148,58,0.2);
+      background: linear-gradient(135deg, var(--brown-dark), var(--brown));
+      color: white;
+      flex-shrink: 0;
+    }
+    .cart-header h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; }
+    .cart-close-btn {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.4rem;
+      cursor: pointer;
+      padding: 4px 8px;
+      border-radius: 8px;
+      transition: background 0.2s;
+      line-height: 1;
+    }
+    .cart-close-btn:hover { background: rgba(255,255,255,0.15); }
+
+    .cart-items { flex: 1; overflow-y: auto; padding: 16px 24px; }
+    .cart-empty { text-align: center; padding: 48px 24px; color: var(--text-light); }
+    .cart-empty-icon { font-size: 3rem; margin-bottom: 12px; }
+
+    .cart-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(200,148,58,0.15);
+    }
+    .cart-item-emoji { font-size: 2rem; flex-shrink: 0; }
+    .cart-item-info { flex: 1; min-width: 0; }
+    .cart-item-name { font-family: 'Playfair Display', serif; font-weight: 700; color: var(--brown-dark); font-size: 0.95rem; }
+    .cart-item-unitprice { color: var(--text-light); font-size: 0.78rem; }
+    .cart-item-subtotal { font-weight: 700; color: var(--gold-dark); font-size: 0.88rem; margin-top: 2px; }
+    .cart-qty { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+    .cart-qty-btn {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      border: 2px solid var(--gold);
+      background: transparent;
+      color: var(--gold-dark);
+      font-size: 1rem;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700;
+      transition: background 0.2s, color 0.2s;
+    }
+    .cart-qty-btn:hover { background: var(--gold); color: white; }
+    .cart-qty-num { font-weight: 700; color: var(--brown-dark); min-width: 20px; text-align: center; }
+    .cart-remove-btn {
+      background: none; border: none; color: #bbb; cursor: pointer;
+      font-size: 1rem; padding: 4px; border-radius: 6px; transition: color 0.2s; flex-shrink: 0;
+    }
+    .cart-remove-btn:hover { color: #e53935; }
+
+    .cart-footer { border-top: 1px solid rgba(200,148,58,0.2); padding: 20px 24px; background: white; flex-shrink: 0; }
+    .cart-total-row {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid rgba(200,148,58,0.15);
+    }
+    .cart-total-label { font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--brown-dark); }
+    .cart-total-value { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 800; color: var(--gold-dark); }
+    .cart-form { display: flex; flex-direction: column; gap: 10px; margin-bottom: 14px; }
+    .cart-form input, .cart-form textarea {
+      width: 100%; padding: 10px 14px;
+      border: 1px solid rgba(200,148,58,0.3); border-radius: var(--radius-sm);
+      background: var(--cream-light); font-family: 'Lato', sans-serif;
+      font-size: 0.9rem; color: var(--brown-dark); outline: none; transition: border-color 0.2s;
+    }
+    .cart-form input:focus, .cart-form textarea:focus { border-color: var(--gold); }
+    .cart-form textarea { resize: none; height: 60px; }
+    .btn-send-wa {
+      width: 100%; padding: 14px;
+      background: #25D366; color: white; border: none;
+      border-radius: var(--radius-sm); font-family: 'Lato', sans-serif;
+      font-weight: 700; font-size: 1rem; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .btn-send-wa:hover { background: #128C7E; transform: translateY(-2px); }
+    .btn-pedir.added { background: linear-gradient(135deg, #4CAF50, #388E3C); }
+
     /* ─── FLOATING WHATSAPP ─── */
     .float-whatsapp {
       position: fixed;
@@ -1313,6 +1469,42 @@
   </style>
 </head>
 <body>
+
+  <!-- ═══════════════════════════════════════════
+       CARRINHO
+  ═══════════════════════════════════════════ -->
+  <div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+  <div class="cart-drawer" id="cartDrawer">
+    <div class="cart-header">
+      <h3>🛒 Meu Pedido</h3>
+      <button class="cart-close-btn" onclick="closeCart()">✕</button>
+    </div>
+    <div class="cart-items" id="cartItems">
+      <div class="cart-empty" id="cartEmpty">
+        <div class="cart-empty-icon">🛒</div>
+        <p>Seu carrinho está vazio.<br>Adicione um pudim!</p>
+      </div>
+    </div>
+    <div class="cart-footer" id="cartFooter" style="display:none">
+      <div class="cart-total-row">
+        <span class="cart-total-label">Total do Pedido</span>
+        <span class="cart-total-value" id="cartTotal">R$ 0,00</span>
+      </div>
+      <div class="cart-form">
+        <input type="text" id="cartNome" placeholder="Seu nome *" />
+        <input type="text" id="cartEndereco" placeholder="Endereço completo *" />
+        <textarea id="cartObs" placeholder="Observações (opcional)"></textarea>
+      </div>
+      <button class="btn-send-wa" onclick="enviarPedidoWA()">
+        📱 Enviar Pedido pelo WhatsApp
+      </button>
+    </div>
+  </div>
+
+  <button class="cart-fab" id="cartFab" onclick="openCart()" aria-label="Ver carrinho" style="display:none">
+    🛒
+    <span class="cart-fab-badge" id="cartBadge">0</span>
+  </button>
 
   <!-- ═══════════════════════════════════════════
        FLOATING WHATSAPP
@@ -1666,7 +1858,7 @@
                 <span>a partir de</span>
                 R$ 35,00
               </div>
-              <button class="btn-pedir" onclick="pedirPudim(this)" data-sabor="Tradicional" data-desc="O clássico que nunca sai de moda. Cremoso, com calda dourada perfeita e sabor inconfundível." data-preco="R$ 35,00">Pedir</button>
+              <button class="btn-pedir" onclick="addToCart(this)" data-sabor="Tradicional" data-desc="O clássico que nunca sai de moda. Cremoso, com calda dourada perfeita e sabor inconfundível." data-preco="R$ 35,00" data-preco-num="35" data-emoji="🍮">Adicionar</button>
             </div>
           </div>
         </div>
@@ -1684,7 +1876,7 @@
                 <span>a partir de</span>
                 R$ 38,00
               </div>
-              <button class="btn-pedir" onclick="pedirPudim(this)" data-sabor="Chocolate" data-desc="Intensidade do cacau em cada pedaço. Cremoso, aveludado e com aroma irresistível." data-preco="R$ 38,00">Pedir</button>
+              <button class="btn-pedir" onclick="addToCart(this)" data-sabor="Chocolate" data-desc="Intensidade do cacau em cada pedaço. Cremoso, aveludado e com aroma irresistível." data-preco="R$ 38,00" data-preco-num="38" data-emoji="🍫">Adicionar</button>
             </div>
           </div>
         </div>
@@ -1702,7 +1894,7 @@
                 <span>a partir de</span>
                 R$ 40,00
               </div>
-              <button class="btn-pedir" onclick="pedirPudim(this)" data-sabor="Ninho" data-desc="Suavidade incomparável do leite ninho. Delicado, cremoso e viciante do primeiro ao último pedaço." data-preco="R$ 40,00">Pedir</button>
+              <button class="btn-pedir" onclick="addToCart(this)" data-sabor="Ninho" data-desc="Suavidade incomparável do leite ninho. Delicado, cremoso e viciante do primeiro ao último pedaço." data-preco="R$ 40,00" data-preco-num="40" data-emoji="🥛">Adicionar</button>
             </div>
           </div>
         </div>
@@ -1719,7 +1911,7 @@
                 <span>a partir de</span>
                 R$ 42,00
               </div>
-              <button class="btn-pedir" onclick="pedirPudim(this)" data-sabor="Paçoca" data-desc="O encontro perfeito do pudim cremoso com a paçoca crocante. Um sabor que remete à infância." data-preco="R$ 42,00">Pedir</button>
+              <button class="btn-pedir" onclick="addToCart(this)" data-sabor="Paçoca" data-desc="O encontro perfeito do pudim cremoso com a paçoca crocante. Um sabor que remete à infância." data-preco="R$ 42,00" data-preco-num="42" data-emoji="🥜">Adicionar</button>
             </div>
           </div>
         </div>
@@ -1736,7 +1928,7 @@
                 <span>a partir de</span>
                 R$ 38,00
               </div>
-              <button class="btn-pedir" onclick="pedirPudim(this)" data-sabor="Coco" data-desc="Frescor tropical com textura sedosa. Leite de coco premium que transforma cada mordida em férias." data-preco="R$ 38,00">Pedir</button>
+              <button class="btn-pedir" onclick="addToCart(this)" data-sabor="Coco" data-desc="Frescor tropical com textura sedosa. Leite de coco premium que transforma cada mordida em férias." data-preco="R$ 38,00" data-preco-num="38" data-emoji="🌴">Adicionar</button>
             </div>
           </div>
         </div>
@@ -1753,7 +1945,7 @@
                 <span>a partir de</span>
                 R$ 44,00
               </div>
-              <button class="btn-pedir" onclick="pedirPudim(this)" data-sabor="Prestígio" data-desc="Chocolate com coco numa combinação sofisticada e irresistível. Para quem ama o melhor." data-preco="R$ 44,00">Pedir</button>
+              <button class="btn-pedir" onclick="addToCart(this)" data-sabor="Prestígio" data-desc="Chocolate com coco numa combinação sofisticada e irresistível. Para quem ama o melhor." data-preco="R$ 44,00" data-preco-num="44" data-emoji="🖤">Adicionar</button>
             </div>
           </div>
         </div>
@@ -1771,7 +1963,7 @@
                 <span>a partir de</span>
                 R$ 48,00
               </div>
-              <button class="btn-pedir" onclick="pedirPudim(this)" data-sabor="Pistache" data-desc="Sofisticação máxima. O sabor gourmet mais elegante da nossa linha, reservado para paladares refinados." data-preco="R$ 48,00">Pedir</button>
+              <button class="btn-pedir" onclick="addToCart(this)" data-sabor="Pistache" data-desc="Sofisticação máxima. O sabor gourmet mais elegante da nossa linha, reservado para paladares refinados." data-preco="R$ 48,00" data-preco-num="48" data-emoji="🌱">Adicionar</button>
             </div>
           </div>
         </div>
@@ -2121,12 +2313,114 @@
     }, { threshold: 0.12 });
     revealEls.forEach(el => revealObs.observe(el));
 
-    // ── Pedido WhatsApp com detalhes do item ──
-    function pedirPudim(el) {
+    // ── Carrinho de Compras ──
+    const cart = [];
+
+    function addToCart(el) {
       const sabor = el.dataset.sabor;
-      const desc  = el.dataset.desc;
-      const preco = el.dataset.preco;
-      const msg   = `Olá, Mikaelly! Gostaria de fazer um pedido 😊\n\n🍮 *Pudim ${sabor}*\n📝 ${desc}\n💰 A partir de ${preco}`;
+      const preco = parseFloat(el.dataset.precoNum);
+      const emoji = el.dataset.emoji || '🍮';
+      const existing = cart.find(i => i.sabor === sabor);
+      if (existing) {
+        existing.qty++;
+      } else {
+        cart.push({ sabor, preco, emoji, qty: 1 });
+      }
+      const orig = el.textContent;
+      el.textContent = '✓ Adicionado!';
+      el.classList.add('added');
+      setTimeout(() => { el.textContent = orig; el.classList.remove('added'); }, 1200);
+      renderCartBadge();
+      openCart();
+    }
+
+    function renderCartBadge() {
+      const total = cart.reduce((s, i) => s + i.qty, 0);
+      const badge = document.getElementById('cartBadge');
+      const fab   = document.getElementById('cartFab');
+      badge.textContent = total;
+      badge.classList.toggle('visible', total > 0);
+      fab.style.display = total > 0 ? 'flex' : 'none';
+    }
+
+    function renderCart() {
+      const container = document.getElementById('cartItems');
+      const empty     = document.getElementById('cartEmpty');
+      const footer    = document.getElementById('cartFooter');
+      if (cart.length === 0) {
+        footer.style.display = 'none';
+        container.innerHTML = '';
+        container.appendChild(empty);
+        empty.style.display = '';
+        return;
+      }
+      empty.style.display = 'none';
+      footer.style.display = '';
+      const rows = cart.map(item => `
+        <div class="cart-item">
+          <span class="cart-item-emoji">${item.emoji}</span>
+          <div class="cart-item-info">
+            <div class="cart-item-name">Pudim ${item.sabor}</div>
+            <div class="cart-item-unitprice">R$ ${item.preco.toFixed(2).replace('.',',')} / unid.</div>
+            <div class="cart-item-subtotal">Subtotal: R$ ${(item.preco * item.qty).toFixed(2).replace('.',',')}</div>
+          </div>
+          <div class="cart-qty">
+            <button class="cart-qty-btn" onclick="changeQty('${item.sabor}', -1)">−</button>
+            <span class="cart-qty-num">${item.qty}</span>
+            <button class="cart-qty-btn" onclick="changeQty('${item.sabor}', +1)">+</button>
+          </div>
+          <button class="cart-remove-btn" onclick="removeItem('${item.sabor}')" title="Remover">✕</button>
+        </div>`).join('');
+      container.innerHTML = rows;
+      container.appendChild(empty);
+      const total = cart.reduce((s, i) => s + i.preco * i.qty, 0);
+      document.getElementById('cartTotal').textContent = 'R$ ' + total.toFixed(2).replace('.', ',');
+    }
+
+    function changeQty(sabor, delta) {
+      const item = cart.find(i => i.sabor === sabor);
+      if (!item) return;
+      item.qty += delta;
+      if (item.qty <= 0) removeItem(sabor);
+      else { renderCart(); renderCartBadge(); }
+    }
+
+    function removeItem(sabor) {
+      const idx = cart.findIndex(i => i.sabor === sabor);
+      if (idx !== -1) cart.splice(idx, 1);
+      renderCart();
+      renderCartBadge();
+    }
+
+    function openCart() {
+      renderCart();
+      document.getElementById('cartOverlay').classList.add('open');
+      document.getElementById('cartDrawer').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeCart() {
+      document.getElementById('cartOverlay').classList.remove('open');
+      document.getElementById('cartDrawer').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function enviarPedidoWA() {
+      const nome = document.getElementById('cartNome').value.trim();
+      const end  = document.getElementById('cartEndereco').value.trim();
+      const obs  = document.getElementById('cartObs').value.trim();
+      if (!nome) { alert('Por favor, informe seu nome.'); document.getElementById('cartNome').focus(); return; }
+      if (!end)  { alert('Por favor, informe o endereço de entrega.'); document.getElementById('cartEndereco').focus(); return; }
+      const total = cart.reduce((s, i) => s + i.preco * i.qty, 0);
+      const itens = cart.map(i =>
+        `• ${i.qty}x Pudim ${i.sabor} — R$ ${(i.preco * i.qty).toFixed(2).replace('.', ',')}`
+      ).join('\n');
+      let msg = `Olá, Mikaelly! Vim pelo site e quero fazer um pedido 😊\n\n`;
+      msg += `🛒 *PEDIDO:*\n${itens}\n\n`;
+      msg += `💰 *TOTAL: R$ ${total.toFixed(2).replace('.', ',')}*\n\n`;
+      msg += `👤 *Nome:* ${nome}\n`;
+      msg += `📍 *Endereço:* ${end}`;
+      if (obs) msg += `\n📝 *Obs:* ${obs}`;
       window.open(`https://wa.me/5585986788455?text=${encodeURIComponent(msg)}`, '_blank');
     }
 

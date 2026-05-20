@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <!-- Prato -->
+  <ellipse cx="32" cy="54" rx="26" ry="6" fill="#C8943A"/>
+  <ellipse cx="32" cy="52" rx="24" ry="4" fill="#E8B85A"/>
+
+  <!-- Corpo do pudim (formato de cúpula) -->
+  <path d="M14 50 Q12 36 18 26 Q24 16 32 14 Q40 16 46 26 Q52 36 50 50 Z" fill="#F5E6C8"/>
+
+  <!-- Calda de caramelo (topo e escorrendo) -->
+  <ellipse cx="32" cy="18" rx="12" ry="6" fill="#A07020"/>
+  <path d="M22 20 Q20 28 18 36 Q19 36 21 28 Q23 20 22 20 Z" fill="#A07020"/>
+  <path d="M42 20 Q44 28 46 36 Q45 36 43 28 Q41 20 42 20 Z" fill="#A07020"/>
+  <path d="M32 14 Q30 22 30 30 Q32 30 32 22 Q32 14 32 14 Z" fill="#C8943A" opacity="0.6"/>
+
+  <!-- Brilho no pudim -->
+  <ellipse cx="26" cy="34" rx="4" ry="7" fill="white" opacity="0.25" transform="rotate(-15 26 34)"/>
+</svg>
